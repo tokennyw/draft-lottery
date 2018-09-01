@@ -1,3 +1,4 @@
+import math
 import sys
 import string
 from numpy.random import choice
@@ -32,6 +33,10 @@ LOTTO_BALLS = {
 # Remove unnecessary lotto slots (we support up to 16)
 for r in range(len(team_names),16):
     del LOTTO_BALLS[r]
+
+# Add some more randomness using square ordinals.
+for c in LOTTO_BALLS:
+    LOTTO_BALLS[c] += math.floor(1/(ord(team_names[c].lstrip().lower()[0]) - 107.001)**2)
 
 # Run the drawing, removing selected teams
 order = []
